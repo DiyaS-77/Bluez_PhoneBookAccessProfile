@@ -8,24 +8,23 @@ class PhoneBookAccess:
     using BlueZ's OBEX and D-Bus interface.
     """
 
-    def __init__(self, device_address):
+    def __init__(self):
         """
         Initialize the PhoneBookAccess client and prepare the OBEX session.
 
         :arg-- device_address: Bluetooth MAC address of the PBAP-supported device
         """
-        self.device_address = device_address
         self.bus = dbus.SessionBus()
         self.client = dbus.Interface(self.bus.get_object("org.bluez.obex", "/org/bluez/obex"), "org.bluez.obex.Client1")
         self.session_path = None
         self.phonebook = None
 
-    def create_session(self):
+    def create_session(self,device_address):
         """
         Create a PBAP OBEX session with the remote device.
         """
         args = {"Target": dbus.String("PBAP")}
-        self.session_path = self.client.CreateSession(self.device_address, args)
+        self.session_path = self.client.CreateSession(device_address, args)
         print(f" Session created at: {self.session_path}")
 
         time.sleep(1)
