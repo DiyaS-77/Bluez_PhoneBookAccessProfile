@@ -27,41 +27,41 @@ while True:
       elif choice == "2"
          bt_manager.Pair(input('Enter the device address to pair : '))
        
-      if choice == "1":
+      if choice == "3":
          device_bdaddr=input('Enter the bd_addr of the device you want to connect:')
          pbap.create_session(device_bdaddr)
              
-      if choice == "1":
+      if choice == "4":
          user_input=input('Select a repository -- Internal/sim1: ')
          folder=input('Enter which pbap object pb,ich,och,mch,fav,spd:')
          pbap.select_phonebook(user_input,folder)
  
-      elif choice == "2":
+      elif choice == "5":
          pbap.get_size()
              
-      elif choice == "3":
+      elif choice == "6":
          pbap.list_contacts()
              
-      elif choice == '4':
+      elif choice == '7':
          handle = input("Enter vCard handle (e.g., 1.vcf): ")
          pbap.pull(handle)
              
-      elif choice == '5':
+      elif choice == '8':
          pbap.pull_all()
              
-      elif choice == '6':
+      elif choice == '9':
          searchfield=input('Enter the field for search operation :')
          searchvalue=input('Enter the value name/number/sound: ')
          pbap.search_contacts(searchfield,searchvalue)
              
-      elif choice == '7':
+      elif choice == '10':
          prop_name=input('Enter the property name :Folder/DatabaseIdentifier/PrimaryCounter/SecondaryCounter/FixedImageSize: ')
          pbap.get_property(prop_name)
              
-      elif choice == '8':
+      elif choice == '11':
          pbap.list_filters()
              
-      elif choice == '9':
+      elif choice == '12':
          pbap.disconnect()
          break
 
