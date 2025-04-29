@@ -1,28 +1,32 @@
 from PhonebookProfileMethods import PhoneBookAccess
 from methods_library import BluetoothManager
 
-bt_manager=BluetoothManager()
-bt_manager.start_discovery()
-bt_manager.Pair(input('Enter the device address to pair : '))
-       
+bt_manager=BluetoothManager()       
 pbap = PhoneBookAccess()
  
 while True:
       print("\n==== Phonebook Access Menu ====")
-      print("1. Connect to remote device")
-      print("2. Select Phonebook")
-      print("3. Show Phonebook Size")
-      print("4. List Contacts (vCards)")
-      print("5. Pull Single vCard")
-      print("6. Pull Entire Phonebook")
-      print("7. Search Contacts")
-      print("8. Get a Phonebook Property")
-      print("9. List Available Filter Fields")
-      print("10. Disconnect and Exit")
+      print("1. Start device discovery ")
+      print("2. Pair with remote device")
+      print("3. Connect to remote device")
+      print("4. Select Phonebook")
+      print("5. Show Phonebook Size")
+      print("6. List Contacts (vCards)")
+      print("7. Pull Single vCard")
+      print("8. Pull Entire Phonebook")
+      print("9. Search Contacts")
+      print("10. Get a Phonebook Property")
+      print("11. List Available Filter Fields")
+      print("12. Disconnect and Exit")
       print("===============================")
       
-      choice = input(" Choose an option (1-9): ")
-
+      choice = input(" Choose an option (1-12): ")
+      if choice == "1":
+         bt_manager.start_discovery()
+             
+      elif choice == "2"
+         bt_manager.Pair(input('Enter the device address to pair : '))
+       
       if choice == "1":
          device_bdaddr=input('Enter the bd_addr of the device you want to connect:')
          pbap.create_session(device_bdaddr)
