@@ -1,6 +1,11 @@
 from PhonebookProfileMethods import PhoneBookAccess
+from methods_library import BluetoothManager
 
-pbap = PhoneBookAccess(input('Enter the device address: '))
+bluetooth_manager=BluetoothManager()
+bluetooth_manager.start_discovery()
+bluetooth_manager.pair_device(input('Enter the bluetooth device address you want to pair:'))
+
+pbap = PhoneBookAccess(input('Enter the device address to connect: '))
 pbap.create_session()
  
 while True:
