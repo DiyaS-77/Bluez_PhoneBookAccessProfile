@@ -74,15 +74,19 @@ class PhoneBookAccess:
         for vcard, name in contacts:
             print(f"{vcard} - {name}")
 
-    def pull(self, vcard_handle, target_file="/tmp/single.vcf"):
+    def pull(self, vcard_handle, target_file="/tmp/single.vcf",fields=None):
         """
         Pull a specific vCard file from the phonebook.
         args---
         : vcard_handle: vCard file handle (e.g. "1.vcf")
         : target_file: File path to store the vCard locally
         """
+        filters={}
+        if fields:
+            filters["Fields"]=dbus.Array(fields,signature='s')
+            print(f"Applying fields filter: {fields}")
         print(f"Pulling vCard: {vcard_handle} to {target_file}")
-        transfer_path, props = self.phonebook.Pull(vcard_handle, target_file, {})
+        transfer_path, props = self.phonebook.Pull(vcard_handle, target_file,filters)
         print(f" Pulled {vcard_handle} to {target_file}")
     
     def pull_all(self, target_file="/tmp/pb.vcf"):
