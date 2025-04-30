@@ -25,7 +25,7 @@ while True:
          bt_manager.start_discovery()
              
       elif choice == "2"
-         bt_manager.Pair(input('Enter the device address to pair : '))
+         bt_manager.pair_device(input('Enter the device address to pair : '))
        
       if choice == "3":
          device_bdaddr=input('Enter the bd_addr of the device you want to connect:')
