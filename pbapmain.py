@@ -17,10 +17,11 @@ while True:
       print("9. Search Contacts")
       print("10. Get a Phonebook Property")
       print("11. List Available Filter Fields")
-      print("12. Disconnect and Exit")
+      print("12. Update version")
+      print("13. Disconnect and Exit")
       print("===============================")
       
-      choice = input(" Choose an option (1-12): ")
+      choice = input(" Choose an option (1-13): ")
       if choice == "1":
          bt_manager.start_discovery()
              
@@ -65,8 +66,11 @@ while True:
              
       elif choice == '11':
          pbap.list_filters()
-             
+
       elif choice == '12':
+         pbap.update_version()
+       
+      elif choice == '13':
          pbap.disconnect()
          break
 
