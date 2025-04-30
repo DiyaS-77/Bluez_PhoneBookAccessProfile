@@ -43,8 +43,13 @@ while True:
          pbap.list_contacts()
              
       elif choice == '7':
-         handle = input("Enter vCard handle (e.g., 1.vcf): ")
-         pbap.pull(handle)
+         handle = input("Enter vCard handle (e.g., 1.vcf): ").strip()
+         fields=input("Enter the fields to include (comma-separated, leave blank for all): ").strip()
+         if fields:
+            field_list=[f.strip().upper() for f in fields.split(",") if f.strip()]
+            pbap.pull(handle,fields=field_list)
+         else:
+            pbap.pull(handle)
              
       elif choice == '8':
          pbap.pull_all()
