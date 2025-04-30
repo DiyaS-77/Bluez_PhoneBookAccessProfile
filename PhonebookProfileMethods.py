@@ -119,7 +119,15 @@ class PhoneBookAccess:
             self.client.RemoveSession(self.session_path)
             print("Session removed.")
             self.session_path = None
-
+            
+    def  update_version(self):
+        '''
+        Attempts to update the PrimaryCounter and SecondaryCounter values.
+        these version counters are used to detect changes in the phonebook database
+        This method does not take any arguments and does not return anything.
+        '''
+        self.phonebook.UpdateVersion()
+        
     def get_property(self, prop_name):
         """
         Retrieve a single property from the phonebook access interface.
