@@ -1,3 +1,21 @@
+   self.add_device(device_address)
+  File "/root/Desktop/BT_BLE_Automation/test_automation/UI/host.py", line 747, in add_device
+    self.on_device_selected(device_name)
+  File "/root/Desktop/BT_BLE_Automation/test_automation/UI/host.py", line 696, in on_device_selected
+    device_name = item.text()
+AttributeError: 'dbus.String' object has no attribute 'text'
+2025-07-07 16:18:43,605 | DEBUG | BTUIApplication | closeEvent | closing <PyQt6.QtGui.QCloseEvent object at 0x7f78fc3a0430>
+2025-07-07 16:18:43,605 - UI - DEBUG - BTUIApplication | closeEvent | closing <PyQt6.QtGui.QCloseEvent object at 0x7f78fc3a0430>
+[INFO] Stopping pulseaudio logs...
+[INFO] Stopping bluetoothd logs...
+[INFO] Stopping HCI dump logs
+[INFO] HCI dump logs stopped successfully
+root@d7:~/Desktop/BT_BLE_Automation# 
+
+
+
+
+
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QPushButton, QTabWidget,
                              QTextBrowser, QListWidget, QListWidgetItem, QHBoxLayout)
 from PyQt6.QtCore import Qt, QTimer
