@@ -1,0 +1,93 @@
+from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QLabel, QPushButton, QTabWidget,
+                             QTextBrowser, QListWidget, QListWidgetItem, QHBoxLayout)
+from PyQt6.QtCore import Qt, QTimer
+
+
+class HostTestUI(QWidget):
+    def __init__(self, controller, bluez_logger, parent=None):
+        super().__init__(parent)
+        self.controller = controller
+        self.bluez_logger = bluez_logger
+
+        self.device_tabs = {}  # Dictionary to store device-specific tabs
+        self.discovered_devices = []  # Track devices added under GAP
+
+        self.init_ui()
+
+    def init_ui(self):
+        main_layout = QVBoxLayout(self)
+
+        # GAP Section Title
+        self.gap_label = QLabel("GAP")
+        self.gap_label.setStyleSheet("font-size: 20px; font-weight: bold; color: black;")
+        main_layout.addWidget(self.gap_label)
+
+        # Discovery buttons
+        discovery_btn_layout = QHBoxLayout()
+        self.discovery_btn = QPushButton("Start Discovery")
+        self.discovery_btn.clicked.connect(self.simulate_device_discovery)
+        discovery_btn_layout.addWidget(self.discovery_btn)
+
+        self.stop_discovery_btn = QPushButton("Stop Discovery")
+        self.stop_discovery_btn.clicked.connect(self.stop_discovery)
+        discovery_btn_layout.addWidget(self.stop_discovery_btn)
+
+        main_layout.addLayout(discovery_btn_layout)
+
+        # List of discovered devices shown under GAP
+        self.device_list_widget = QListWidget()
+        self.device_list_widget.setStyleSheet("background-color: white; border: 1px solid black;")
+        self.device_list_widget.itemClicked.connect(self.on_device_selected)
+        main_layout.addWidget(self.device_list_widget)
+
+        # Tab view for displaying profiles supported by a device
+        self.profile_tab_widget = QTabWidget()
+        main_layout.addWidget(self.profile_tab_widget)
+
+        self.setLayout(main_layout)
+
+    def simulate_device_discovery(self):
+        """
+        Simulate discovery and add a dummy device entry under GAP.
+        Replace this with real DBus discovery handling.
+        """
+        new_device = "Device_" + str(len(self.discovered_devices) + 1)
+        if new_device not in self.discovered_devices:
+            self.discovered_devices.append(new_device)
+            item = QListWidgetItem(new_device)
+            self.device_list_widget.addItem(item)
+
+    def stop_discovery(self):
+        """
+        Dummy method to stop discovery.
+        Add DBus stop discovery logic here.
+        """
+        print("Discovery stopped")
+
+    def on_device_selected(self, item):
+        """
+        Triggered when a device name is clicked under GAP.
+        Opens tabs showing the profiles supported.
+        """
+        device_name = item.text()
+
+        if device_name not in self.device_tabs:
+            profile_tab = QTabWidget()
+
+            # Dummy profile data per device
+            profiles = ["A2DP", "HFP", "OPP"]
+            for profile in profiles:
+                profile_widget = QTextBrowser()
+                profile_widget.setText(f"{profile} related operations go here for {device_name}.")
+                profile_tab.addTab(profile_widget, profile)
+
+            # Create a wrapper widget to hold the tab widget
+            device_tab_wrapper = QWidget()
+            wrapper_layout = QVBoxLayout()
+            wrapper_layout.addWidget(profile_tab)
+            device_tab_wrapper.setLayout(wrapper_layout)
+
+            self.device_tabs[device_name] = device_tab_wrapper
+            self.profile_tab_widget.addTab(device_tab_wrapper, device_name)
+
+        self.profile_tab_widget.setCurrentWidget(self.device_tabs[device_name])
